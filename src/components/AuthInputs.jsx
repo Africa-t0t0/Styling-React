@@ -15,16 +15,16 @@ const Label = styled.label`
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #6b7280;
+  color: ${({invalid}) => invalid ? '#f87171' : '#6b7280'};
 `
 
 const Input = styled.input`
   width: 100%;
   padding: 0.75rem 1rem;
   line-height: 1.5;
-  background-color: #d1d5db;
-  color: #374151;
-  border: 1px solid transparent;
+  background-color: ${({invalid}) => invalid ? '#fed2d2' : '#d1d5db'};
+  color: ${({invalid}) => invalid ? '#ef4444' : '#374151'};
+  border: 1px solid ${({invalid}) => invalid ? '#f73f3f' : 'transparent'};
   border-radius: 0.25rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 `
@@ -55,7 +55,9 @@ export default function AuthInputs() {
       <ControlContainer>
         <p>
             <Label
-              className={`label ${emailNotValid ? 'invalid' : ''}`}
+              invalid={emailNotValid}
+              // testing another wayt of showing dynamic fields
+              // className={`label ${emailNotValid ? 'invalid' : ''}`}
             >Email</Label>
             <Input
               type="email"
@@ -64,17 +66,20 @@ export default function AuthInputs() {
                 // backgroundColor: emailNotValid ? '#fed2d2' : '#d1d5db'
               }}
               // we can also use conditional class names!!
-              className={emailNotValid ? 'invalid' : undefined}
+              // className={emailNotValid ? 'invalid' : undefined}
+              invalid={emailNotValid}
               onChange={(event) => handleInputChange('email', event.target.value)}
             />
           </p>
           <p>
             <Label
-              className={`label ${passwordNotValid ? 'invalid' : ''}`}
+              // className={`label ${passwordNotValid ? 'invalid' : ''}`}
+              invalid={passwordNotValid}
             >Password</Label>
             <Input
               type="password"
-              className={passwordNotValid ? 'invalid' : undefined}
+              // className={passwordNotValid ? 'invalid' : undefined}
+              invalid={passwordNotValid}
               onChange={(event) =>
                 handleInputChange('password', event.target.value)
               }
